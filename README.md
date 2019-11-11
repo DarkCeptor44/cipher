@@ -16,4 +16,8 @@ Useful to hide text from people with either physical or remote access to your ma
 * You can use any password on encryption but if you try to decrypt with a different password than you used it's gonna give an error.
 * I recommend use of [auto-py-to-exe](https://github.com/brentvollebregt/auto-py-to-exe) to compile `.py` in `.exe` which makes it harder for someone to see the code.
 
+## Download
+
+If you don't care about the security of generating your own salt then you can download a version that comes with a pre-generated salt, links are on the [Releases](https://github.com/DarkCeptor44/cipher/releases) tab.
+
 ### This script is meant for less tech-savvy people as it's not highly advanced but can be modified to whatever you need
