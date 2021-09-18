@@ -8,7 +8,7 @@ Useful to hide text from people with either physical or remote access to your ma
  1. Download `cipher.py` to your machine.
  2. Open a command prompt on the directory where `cipher.py` is:
  3. Type `python` , press Enter, type `import os; os.urandom(16)` , press Enter and copy the line that shows up (it looks like `b'xxxxxxxxxxxxxxxxxxx'` )
- 4. Open `cipher.py` and look for line 58 where it says `salt = b'xxxxxxxxxxxxxxx'` , then just paste that line you copied after the `=` .
+ 4. Open `cipher.py` and look for line 8 where it says `SALT = b'xxxxxxxxxxxxxxx'` , then just paste that line you copied after the `=` .
  5. Save it and run it to encrypt the `.txt` files that are in the same directory.
 
 ## Notes

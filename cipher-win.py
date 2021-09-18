@@ -5,10 +5,17 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.fernet import Fernet, InvalidToken
 
-EXCEPTIONS = ["cipher.py", "cipher.exe"]
+SALT = b"\xec\xdc\xd5\xd2:J\xe2\x9e?\xd6\x1f\x0b^\xc4Hs"
 
 
-def encode(filename, fernet):
+def get_cur_file_wo_xtension():
+    return str(__file__).split('\\')[-1:][0].split('.')[:-1]
+
+
+EXCEPTIONS = (f"{get_cur_file_wo_xtension()}.py", f"{get_cur_file_wo_xtension()}.exe")
+
+
+def encode(filename, _fernet):
     if filename.endswith(".cipher"):
         raise Exception("can't encode an already encoded file")
 
@@ -17,7 +24,7 @@ def encode(filename, fernet):
     with open(filename, "rb") as f:
         data = f.read()
 
-    encrypted = fernet.encrypt(data)
+    encrypted = _fernet.encrypt(data)
 
     with open(filename, "wb") as f:
         f.write(encrypted)
@@ -25,7 +32,7 @@ def encode(filename, fernet):
     os.rename(filename, get_filename_without_extension(filename) + ".cipher")
 
 
-def decode(filename, fernet):
+def decode(filename, _fernet):
     if filename.endswith(".txt"):
         raise Exception("can't decode an already decoded file")
 
@@ -34,7 +41,7 @@ def decode(filename, fernet):
     with open(filename, "rb") as f:
         data = f.read()
 
-    decrypted = fernet.decrypt(data)
+    decrypted = _fernet.decrypt(data)
 
     with open(filename, "wb") as f:
         f.write(decrypted)
@@ -55,11 +62,10 @@ def get_filename_without_extension(filename):
 
 def get_key_from_password(password_provided):
     password = password_provided.encode()
-    salt = b"\xec\xdc\xd5\xd2:J\xe2\x9e?\xd6\x1f\x0b^\xc4Hs"
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
         length=32,
-        salt=salt,
+        salt=SALT,
         iterations=100000,
         backend=default_backend(),
     )
