@@ -1,7 +1,9 @@
+# Disclaimer: This is not the most secure tool on the planet, it's simply a personal project for passing time and probably won't work against an actual attacker with bad intentions.
+
 # Cipher
 
 Encrypts and Decrypts any `.txt` file in the current directory when a password is provided (unless the names of the files are specified in the `EXCEPTIONS` array).
-Useful to hide text from people with either physical or remote access to your machine, you can use for diaries (just an example).
+Useful to hide text from people with either physical or remote access to your machine (as long as they're not actual attackers), you can use for diaries (just an example).
 
 ## How to use
 
