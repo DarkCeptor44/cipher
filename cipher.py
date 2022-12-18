@@ -13,7 +13,7 @@ def get_cur_file_wo_xtension():
     return str(__file__).split('\\')[-1:][0].split('.')[:-1]
 
 
-EXCEPTIONS = (f"{get_cur_file_wo_xtension()}.py", f"{get_cur_file_wo_xtension()}.exe")
+EXCEPTIONS = (f"{get_cur_file_wo_xtension()}.py", f"{get_cur_file_wo_xtension()}.exe", "LICENSE", "README.md")
 
 
 def is_windows():
@@ -82,7 +82,13 @@ if __name__ == "__main__":
         if is_windows():
             os.system("color b")  # Completely useless BTW
         files = os.listdir(".")
-        key = get_key_from_password(input("Insert key to encrypt/decrypt the files: "))
+        pword = input("Insert key to encrypt/decrypt the file: ")
+        confirm_pword = input("Confirm key: ")
+
+        if pword != confirm_pword:
+            raise InvalidToken("password and confirmation must be the same")
+
+        key = get_key_from_password(pword)
         fernet = Fernet(key)
 
         for file in files:
@@ -93,9 +99,5 @@ if __name__ == "__main__":
     except Exception as ex:
         print("Error: %s" % str(ex))
     finally:
-        cmd = ''
         if is_windows():
-            cmd = "timeout /t 3 >nul"
-        else:
-            cmd = 'read -p "Press [Enter] key to continue..."'
-        os.system(cmd)
+            os.system("timeout /t 3 >nul")
