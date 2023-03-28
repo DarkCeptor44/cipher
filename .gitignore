@@ -1,0 +1,6 @@
+__pycache__
+*.manifest
+*.spec
+dist/
+.idea/
+*.cipher

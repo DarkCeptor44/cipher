@@ -86,7 +86,7 @@ if __name__ == "__main__":
         confirm_pword = input("Confirm key: ")
 
         if pword != confirm_pword:
-            raise InvalidToken("password and confirmation must be the same")
+            raise Exception("password and confirmation must be the same")
 
         key = get_key_from_password(pword)
         fernet = Fernet(key)
