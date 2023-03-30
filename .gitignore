@@ -1,6 +1,7 @@
 __pycache__
 *.manifest
 *.spec
+build/
 dist/
 .idea/
 *.cipher
